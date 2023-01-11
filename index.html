@@ -17,36 +17,26 @@
       href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Added JQuery Style Sheet -->
-    <link
-      rel="stylesheet"
-      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
-    />
-<!-- Changed to our own stylesheet -->
+<!-- Linked to our own stylesheet -->
     <link rel="stylesheet" href="./assets/style.css" />
 </head>
 
 <!-- -----------------Head row with Timer element (set element to increase by seconds) -->
-<header>
-    <div class="container-fluid">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-12 col-lg-12">
+<body>
+<header class="p-5 mb-4 text-center header">
           <h1>Project Tracker</h1>
-        </div>
-        <div class="col-12 col-lg-12">
-            <h2>Current Time & Date: <br/></h2>
-            <span id="time-display"></span>
-        </div>
-      </div>
-    </div>
+          <h2>Current Time & Date: <br/></h2>
+          <span id="time-display"></span>
 </header>
 
-<body>
+
+  <main class="container-fluid">
     <!-- --------------Form using Bootstrap, Left Hand Side and will take 1/3, using local storage that will store in the next box below -->
-    <div class="card">
-        <div class="card-body">
+    <div class="row">
+        <div class="col-md col-xl-4">
+          <div class="card mb-3">
           <h2 class="h4 card-header custom-card-header">Instructions</h2>
-          <div>
+          <div class="card-body">
           <p class="card-text">Click the button below to open a form and provide information
             for the following:</p>
         </div>
@@ -55,71 +45,76 @@
           <li class="list-group-item">Project Type</li>
           <li class="list-group-item">Due Date</li>
         </ul>
-        <div class="card-footer">
+          <div class="card-footer">
             <button
             class="btn btn-block btn-custom w-100"
             data-bs-toggle="modal"
             data-bs-target="#new-project-modal">
             Add Project
           </button>
+          </div>
         </div>
       </div>
 <!-- -------------------Right Hand List that will take up 2/3 of screen >> this will be the "table that capture the inputs" -->
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col"></th>
-        <th scope="col">Name</th>
-        <th scope="col">Type</th>
-        <th scope="col">Due</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th id="project-displayed"></th>
-        <td>Class Project</td>
-        <td>Mobile Application</td>
-        <td>01/10/2023</td>
-      </tr>
-      <tr>
-        <th class="project-late"></th>
-        <td>Class Project</td>
-        <td>Mobile Application</td>
-        <td>01/10/2023</td>
-      </tr>
-      <tr>
-        <th class="project-today"></th>
-        <td>Class Project</td>
-        <td>Mobile Application</td>
-        <td>01/10/2023</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="col-md col-xl-8">
+<table class="table table-custom">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Due</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="project-display">
+    <tr>
+      <td>Class Project</td>
+      <td>Web Application (Front End)</td>
+      <td>10/01/2023</td>
+      <td><button class="btn btn-sm">X</button></td>
+    </tr>
+    <tr class="project-late">
+      <td>Class Project</td>
+      <td>Web Application (Back End)</td>
+      <td>31/12/2022</td>
+      <td><button class="btn btn-sm">X</button></td>
+    </tr>
+    <tr class="project-today">
+      <td>Class Project</td>
+      <td>Mobile Application</td>
+      <td>01/10/2023</td>
+      <td><button class="btn btn-sm">X</button></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</main>
+
 <!-- -----------------------Modus to be added  -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="new-project-modal" tabindex="-1" aria-labelledby="new-project-modal-Label" aria-hidden="true">
     
   <div class="modal-dialog">
     <div class="modal-content">
-    <form id="project-form">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add a New Project</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
+      <form id="project-form">
+        <div class="modal-header custom-modal-header">
+          <h5 class="modal-title" id="new-project-modal-label">Add a New Project</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         <!-- Input Text Form  -->
-        <form>
-          <div class="mb-3">
-            <label for="project-name-input">Project Name:</label>
-            <input  type="text" 
-                    class="form-control" 
-                    id="project-name-input"
-                    placeholder="Enter the Project's Name"
-                    required
-            />
-          </div>
+        </div>
+        <div class="modal-body">
+        <div class="mb-3">
+        <label for="project-name-input">Project Name:</label>
+        <input  type="text" 
+                id="project-name-input"
+                class="form-control" 
+                placeholder="Enter the Project's Name"
+                required
+        />
+        </div>
           <!-- Drop Down Box (list to choose from) -->
           <div class="mb-3">
-            <label for="project-type-input" class="form-label">Project Type</label>
+            <label for="project-type-input" class="form-label">Project Type:</label>
 
             <select id="project-type-input" class="form-select">
                 <option value="Web Applications (Front End)">Web Application (Front End)</option>
@@ -132,7 +127,7 @@
           </div>
           <!-- Date box to select projects due date -->
           <div class="mb-3">
-            <label for="project-date-input">Due Date</label>
+            <label for="project-date-input">Due Date:</label>
             <input
               type="date"
               id="project-date-input"
@@ -140,7 +135,6 @@
               required
             />
           </div>
-        </form>
       </div>
       <div class="modal-footer">
 <!--The data-bs-dismiss attribute tells Bootstrap to hide the <div class="modal-footer"> element on click.-->
@@ -160,26 +154,31 @@
               </button>
       </div>
     </form>
-    </div>
+  </div>
   </div>
 </div>
 
-<!-- -----------------------JavaScript Link and Sources -->
+<!-- -----------------------JavaScript Link's and Sources -->
+
+<!-- Bootstrap -->
 <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+    <!-- JQuery  -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
       integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
       crossorigin="anonymous"
     ></script>
+    <!-- Ben's created/linked 'internal' JavaScript -->
       <script src="./assets/script.js"></script>
 </body>
 
-<footer class="align-items-center">
+
+<footer id="footer">
     <h3>Made with 💖 by Ben Armstrong</h3>
 </footer>
 
